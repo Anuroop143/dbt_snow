@@ -2,4 +2,4 @@
     ID as customer_id,
 	FIRST_NAME ,
 	LAST_NAME 
-     from    RAW.JAFFLE_SHOP.CUSTOMERS
+     from {{ source('jaffle_shop', 'customers') }}
