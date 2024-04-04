@@ -1,7 +1,9 @@
 with orders as  (
-	ID ,
+	select ID ,
 	USER_ID ,
 	ORDER_DATE ,
 	STATUS ,
 	_ETL_LOADED_AT
-    fromn RAW.JAFFLE_SHOP.ORDERS)
+    from RAW.JAFFLE_SHOP.ORDERS
+    )
+    select * from orders
