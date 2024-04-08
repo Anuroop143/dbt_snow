@@ -1,12 +1,12 @@
-	with source as(
-        select * from {{ source('JAFFLE_SHOP', 'ORDERS') }}
-    ),
-    staged as (
-    select ID  as order_id,
-	USER_ID  as customer_id,
-	ORDER_DATE ,
-	STATUS ,
-	_ETL_LOADED_AT
-    from source
-    )
-    select * from staged
+with orders as (
+    
+    select
+        id as order_id,
+        user_id as customer_id,
+        order_date,
+        status
+
+    from raw.jaffle_shop.orders
+)
+
+select * from orders
