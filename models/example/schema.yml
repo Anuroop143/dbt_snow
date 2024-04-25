@@ -1,21 +1,53 @@
-
 version: 2
 
 models:
-    - name: my_first_dbt_model
-      description: "A starter dbt model"
-      columns:
-          - name: id
-            description: "The primary key for this table"
-            tests:
-                - unique
-                - not_null
+  - name: my_first_dbt_model
+    description: "A starter dbt model"
+    columns:
+      - name: id
+        description: "The primary key for this table"
+        tests:
+          - unique
+          - not_null
+          - accepted_values:
+              values: [1, 2]
 
-    - name: my_second_dbt_model
-      description: "A starter dbt model"
-      columns:
-          - name: id
-            description: "The primary key for this table"
-            tests:
-                - unique
-                - not_null
+  - name: my_second_dbt_model
+    description: "A starter dbt model"
+    columns:
+      - name: id
+        description: "The primary key for this table"
+        tests:
+          - unique
+          - not_null
+          - relationships:
+              to: ref('my_first_dbt_model')
+              field: id
+
+  - name: raw_customers
+    description: "A Customer data dbt model"
+    columns:
+      - name: cust_id
+        description: "The primary key for this table"
+        tests:
+          - unique
+          - not_null
+      - name: market_segment
+        description: "The market segment for this table"
+        tests:
+          - accepted_values:
+              values:
+                [
+                  "BUILDING",
+                  "AUTOMOBILE",
+                  "MACHINERY",
+                  "HOUSEHOLD",
+                  "FURNITURE",
+                ]
+
+sources:
+  - name: sample
+    database: snowflake_sample_data
+    schema: TPCH_SF100
+    tables:
+      - name: customer
