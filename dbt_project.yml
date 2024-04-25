@@ -35,8 +35,12 @@ clean-targets: # directories to be removed by `dbt clean`
 
 models:
   dbtlearn:
-   +materialized: view 
+    +materialized: view
   dim:
     +materialized: table
   src:
-       +materialized: ephemeral  
+    +materialized: ephemeral
+vars:
+  my_first_variable: True
+  my_second_variable: 2020
+  my_third_variable: 1
