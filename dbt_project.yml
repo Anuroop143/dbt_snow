@@ -21,15 +21,8 @@ snapshot-paths: ["snapshots"]
 target-path: "target" # directory which will store compiled SQL files
 clean-targets: # directories to be removed by `dbt clean`
   - "target"
-  - "dbt_packages"
+  - "dbt_modules"
 
-on-run-start:
-  - "create table if not exists audit (model text, state text, time timestamp_ltz)"
-
-on-run-end:
-  - "grant usage on schema airbnb.dbt_vsamudrala to role analyst"
-  - "grant select on all tables in schema airbnb.dbt_vsamudrala to role analyst"
-  - "grant select on all views in schema airbnb.dbt_vsamudrala to role analyst"
 # Configuring models
 # Full documentation: https://docs.getdbt.com/docs/configuring-models
 
@@ -42,14 +35,11 @@ on-run-end:
 
 models:
   dbtlearn:
-    +materialized: VIEW
-  dim:
-    +materialized: TABLE
-  src:
-    +materialized: EPHEMERAL 
+    dim:
+      +materialized: table
+    src:
+      +materialized: ephemeral
 vars:
   my_first_variable: True
   my_second_variable: 2020
   my_third_variable: 1
-  pre-hook:
-    - "insert into airbnb.dbt_vsamudrala.audit (model, state, time) values ('{{this.name}}', 'starting model deployment', current_timestamp)"
