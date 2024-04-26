@@ -51,3 +51,11 @@ sources:
     schema: TPCH_SF100
     tables:
       - name: customer
+
+  - name: air
+    database: airbnb
+    schema: raw
+    tables:
+      - name: raw_hosts
+      - name: raw_listings
+      - name: raw_reviews
