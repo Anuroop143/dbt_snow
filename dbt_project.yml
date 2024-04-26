@@ -42,11 +42,11 @@ on-run-end:
 
 models:
   dbtlearn:
-    +materialized: view
+    +materialized: VIEW
   dim:
-    +materialized: table
+    +materialized: TABLE
   src:
-    +materialized: ephemeral
+    +materialized: EPHEMERAL 
 vars:
   my_first_variable: True
   my_second_variable: 2020
