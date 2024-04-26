@@ -7,7 +7,7 @@ select c_custkey as cust_id,
        c_nationkey as nation_id,
        c_phone as phone_number,
        c_acctbal as account_balance,
-       c_mktsegment as market_segment,
+       {{rename_segments('c_mktsegment')}} as  mksegmentadjustment,
        c_comment as comment
 from {{ source('sample', 'customer')}}
 )
